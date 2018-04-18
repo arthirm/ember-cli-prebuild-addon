@@ -16,12 +16,15 @@ Usage
 Using prebuild-addon is fairly straightforward. However, the addon has to provide details about what addon trees can be prebuilt. For instance, it could be `addon`, `templates`, `addon-test-support` etc.
 Generally the trees that will not be modified dynamically during build are safe to be prebuilt.  
 
+```
 ember prebuild --trees=addon,templates
+```
 
 The trees to be prebuilt can be passed either from command line option 'trees' or it can be specified in package.json
 
+```
  "prebuildTrees" : ["addon", "templates" ,"addon-test-support"]
-
+```
 
 
 Contributing
