@@ -1,5 +1,8 @@
 'use strict';
 
 module.exports = {
-  name: 'prebuild-addon'
+  name: 'ember-cli-prebuild-addon',
+  includedCommands() {
+    return require('./lib/commands');
+  },
 };

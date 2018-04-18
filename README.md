@@ -1,20 +1,27 @@
-prebuild-addon
+ember-cli-prebuild-addon
 ==============================================================================
 
-[Short description of the addon.]
+Prebuilds your addon and stores it in a specific location inside addon so when your addon is being imported in an app, it need not have to be built again while building the app.  
 
 Installation
 ------------------------------------------------------------------------------
 
 ```
-ember install prebuild-addon
+ember install ember-cli-prebuild-addon
 ```
 
 
 Usage
 ------------------------------------------------------------------------------
+Using prebuild-addon is fairly straightforward. However, the addon has to provide details about what addon trees can be prebuilt. For instance, it could be `addon`, `templates`, `addon-test-support` etc.
+Generally the trees that will not be modified dynamically during build are safe to be prebuilt.  
 
-[Longer description of how to use the addon in apps.]
+ember prebuild --trees=addon,templates
+
+The trees to be prebuilt can be passed either from command line option 'trees' or it can be specified in package.json
+
+ "prebuildTrees" : ["addon", "templates" ,"addon-test-support"]
+
 
 
 Contributing
@@ -23,7 +30,7 @@ Contributing
 ### Installation
 
 * `git clone <repository-url>`
-* `cd prebuild-addon`
+* `cd ember-cli-prebuild-addon`
 * `npm install`
 
 ### Linting
