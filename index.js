@@ -19,6 +19,11 @@ module.exports = {
     const origTreeFor = addon.prototype.treeFor;
 
     addon.prototype.treeFor = function(treeType) {
+      let addonCacheKey = this.cacheKeyForTree(treeType);
+      let cachedItem = _treeCache.getItem(addonCacheKey)
+      if(cachedItem) {
+        return cachedItem;
+      }
      if (!TREES_TO_NOT_PREBUILD.includes(treeType) &&  ((this.app &&  this.app.options.overrideIsDevelopingAddon === true) || !this.isDevelopingAddon()) ) {
         const addonVersion = this.pkg.version ? this.pkg.version : '';
         let targetGroup = this.project.targets.browsers;
@@ -29,6 +34,9 @@ module.exports = {
         if(fs.existsSync(path.join(prebuiltTree, treeType))) {
           logger.info(`Returning ${treeType} tree for ${this.name}`);
           console.log(`**** Returning ${treeType} tree for ${this.name}`);
+          if (addonCacheKey) {
+            _treeCache.setItem(addonCacheKey, prebuiltTree);
+          }
           return prebuiltTree;
         }
       }
